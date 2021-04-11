@@ -7,6 +7,7 @@ using Xunit;
 
 namespace NerdStore.BDD.Tests.Usuario
 {
+    //classe criada para conter os passos em comum com os diversos testes
     [Binding]
     [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
     public class CommomSteps
