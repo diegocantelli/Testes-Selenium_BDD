@@ -37,11 +37,13 @@ namespace NerdStore.BDD.Tests.Config
             return WebDriver.Url;
         }
 
+        //Navegando para uma determinada URL
         public void IrParaUrl(string url)
         {
             WebDriver.Navigate().GoToUrl(url);
         }
 
+        //Validando se a URL atual do browser contém uma determinada string
         public bool ValidarConteudoUrl(string conteudo)
         {
             return Wait.Until(ExpectedConditions.UrlContains(conteudo));
@@ -55,6 +57,7 @@ namespace NerdStore.BDD.Tests.Config
             link.Click();
         }
 
+        //Clicando em um botão
         public void ClicarBotaoPorId(string botaoId)
         {
             var botao = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(botaoId)));
@@ -80,6 +83,7 @@ namespace NerdStore.BDD.Tests.Config
         public void PreencherTextBoxPorId(string idCampo, string valorCampo)
         {
             var campo = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idCampo)));
+            //SendKeys -> Ele simula a digitação em um campo, não apenas cola o valor no textbox
             campo.SendKeys(valorCampo);
         }
 
@@ -106,6 +110,7 @@ namespace NerdStore.BDD.Tests.Config
                 .GetAttribute("value");
         }
 
+        //Obtendo uma lista de todos os elementos que contenham uma determinada classe assim que eles estejam disponíveis na página
         public IEnumerable<IWebElement> ObterListaPorClasse(string className)
         {
             return Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.ClassName(className)));
@@ -134,22 +139,28 @@ namespace NerdStore.BDD.Tests.Config
             screenshot.SaveAsFile($"{Configuration.FolderPicture}{fileName}", ScreenshotImageFormat.Png);
         }
 
+        //Validando se um elemento existe na pagina
         private bool ElementoExistente(By by)
         {
             try
             {
+                //caso exista retorna true
                 WebDriver.FindElement(by);
                 return true;
             }
             catch (NoSuchElementException)
             {
+                //Caso não exista retorna falso sem lançar exceção
                 return false;
             }
         }
 
         public void Dispose()
         {
+            //WebDriver.Quit() -> Fecha o browser de fato
             WebDriver.Quit();
+
+            //Libera a alocação de memória para o garbage colector
             WebDriver.Dispose();
         }
     }
