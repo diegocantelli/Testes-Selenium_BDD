@@ -6,6 +6,7 @@ using Xunit;
 namespace NerdStore.BDD.Tests.Pedido
 {
     [Binding]
+    //Chamando a fixture de teste
     [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
     public class Pedido_AdicionarItemAoCarrinhoSteps
     {
@@ -18,6 +19,7 @@ namespace NerdStore.BDD.Tests.Pedido
 
         public Pedido_AdicionarItemAoCarrinhoSteps(AutomacaoWebTestsFixture testsFixture)
         {
+            //Recebendo uma instacia da fixture via injeção de dependência
             _testsFixture = testsFixture;
             _pedidoTela = new PedidoTela(testsFixture.BrowserHelper);
             _loginUsuarioTela = new LoginUsuarioTela(testsFixture.BrowserHelper);
