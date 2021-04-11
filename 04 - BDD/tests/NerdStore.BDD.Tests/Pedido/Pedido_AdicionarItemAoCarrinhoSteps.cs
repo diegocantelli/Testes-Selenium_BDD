@@ -21,6 +21,8 @@ namespace NerdStore.BDD.Tests.Pedido
         {
             //Recebendo uma instacia da fixture via injeção de dependência
             _testsFixture = testsFixture;
+
+            //Classe específica que contém os métodos pertinentes à tela de pedidos - Page Object Model
             _pedidoTela = new PedidoTela(testsFixture.BrowserHelper);
             _loginUsuarioTela = new LoginUsuarioTela(testsFixture.BrowserHelper);
         }
@@ -47,9 +49,12 @@ namespace NerdStore.BDD.Tests.Pedido
         public void DadoQueUmProdutoEstejaNaVitrine()
         {
             // Arrange
+
+            //Apenas nevage para a tela de vitrine dos produtos
             _pedidoTela.AcessarVitrineDeProdutos();
 
             // Act
+            //Clica no primeiro produto da vitrine com base no xPath especificado
             _pedidoTela.ObterDetalhesDoProduto();
             _urlProduto = _pedidoTela.ObterUrl();
 
