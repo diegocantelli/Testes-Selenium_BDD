@@ -3,6 +3,8 @@ using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+
+//SeleniumExtras.WaitHelpers.ExpectedConditions -> pacote que deve ser instalado para poder usar o Wait
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace NerdStore.BDD.Tests.Config
@@ -12,6 +14,8 @@ namespace NerdStore.BDD.Tests.Config
     {
         public IWebDriver WebDriver;
         public readonly ConfigurationHelper Configuration;
+
+        //Define um tempo de espera para aguardar a tela carregar
         public WebDriverWait Wait;
 
         //Browser -> indica qual browser deseja que o selenium execute
@@ -23,6 +27,8 @@ namespace NerdStore.BDD.Tests.Config
             //Método responsáver por retornar uma instância do WebDriver
             WebDriver = WebDriverFactory.CreateWebDriver(browser, Configuration.WebDrivers, headless);
             WebDriver.Manage().Window.Maximize();
+
+            //Caso a página ainda esteja renderizando, definirá um timeout de 30 segs para aguardar o carregamento do elemento/página
             Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30));
         }
 
@@ -43,7 +49,8 @@ namespace NerdStore.BDD.Tests.Config
 
         public void ClicarLinkPorTexto(string linkText)
         {
-            //Clicando em um link com base no texto
+            //Aguardando que um elemento esteja visível na tela e clicando nele assim que estiver visível
+            //Caso o elemento não seja encontrado, será lançada uma exceção e o Selenium irá interromper a execução
             var link = Wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(linkText)));
             link.Click();
         }
