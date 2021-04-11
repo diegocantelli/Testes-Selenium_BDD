@@ -64,6 +64,7 @@ namespace NerdStore.BDD.Tests.Config
             botao.Click();
         }
 
+        //Obtendo um elemento via XPath
         public void ClicarPorXPath(string xPath)
         {
             var elemento = Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xPath)));
