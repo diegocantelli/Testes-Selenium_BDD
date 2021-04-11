@@ -43,7 +43,7 @@ namespace NerdStore.BDD.Tests.Config
 
         public void ClicarLinkPorTexto(string linkText)
         {
-            
+            //Clicando em um link com base no texto
             var link = Wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(linkText)));
             link.Click();
         }
