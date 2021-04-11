@@ -7,15 +7,20 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace NerdStore.BDD.Tests.Config
 {
+    //Classe criada para configurar o Selenium
     public class SeleniumHelper : IDisposable
     {
         public IWebDriver WebDriver;
         public readonly ConfigurationHelper Configuration;
         public WebDriverWait Wait;
 
+        //Browser -> indica qual browser deseja que o selenium execute
+        //bool headless = true -> é poder abrir o browser e poder navegar nele sem enxergar a janela
         public SeleniumHelper(Browser browser, ConfigurationHelper configuration, bool headless = true)
         {
             Configuration = configuration;
+
+            //Método responsáver por retornar uma instância do WebDriver
             WebDriver = WebDriverFactory.CreateWebDriver(browser, Configuration.WebDrivers, headless);
             WebDriver.Manage().Window.Maximize();
             Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30));
@@ -38,6 +43,7 @@ namespace NerdStore.BDD.Tests.Config
 
         public void ClicarLinkPorTexto(string linkText)
         {
+            
             var link = Wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(linkText)));
             link.Click();
         }

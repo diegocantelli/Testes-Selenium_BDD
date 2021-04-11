@@ -3,8 +3,10 @@ using System.IO;
 
 namespace NerdStore.BDD.Tests.Config
 {
+    //Esta classe é apenas um Helper para abstrair funcionalidades como obter localização dos drivers e urls que serão testadas
     public class ConfigurationHelper
     {
+        //Necessário instalar o pacote Microsoft.Extensions.Configuration
         private readonly IConfiguration _config;
 
         public ConfigurationHelper()
